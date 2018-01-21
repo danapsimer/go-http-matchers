@@ -1,14 +1,24 @@
 package extractor_test
+// Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
+// licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+// compliance with the License.  You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations under the License.
 
 import (
-	"testing"
-	"net/http"
-	"github.com/stretchr/testify/assert"
-	"github.com/bluesoftdev/go-http-matchers/extractor"
-	"strings"
-	"reflect"
-	"net/http/httputil"
 	"fmt"
+	"github.com/bluesoftdev/go-http-matchers/extractor"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"net/http/httputil"
+	"reflect"
+	"strings"
+	"testing"
 )
 
 func TestExtractHeader(t *testing.T) {
@@ -179,4 +189,11 @@ func TestExtractIdentity(t *testing.T) {
 		assert.Equal(t, req, resultReq,
 			fmt.Sprintf("expected result to be the same as the passed in request but got: %s", dumpReq(resultReq)))
 	}
+}
+
+func TestExtractHost(t *testing.T) {
+	req, err := http.NewRequest("GET", "http://foo.com/test/foo/bar?q=5&l=3", nil)
+	assert.NoError(t, err, "failed to create test request.")
+	result := extractor.ExtractHost().Extract(req)
+	assert.Equal(t,"foo.com", result)
 }

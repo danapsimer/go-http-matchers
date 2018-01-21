@@ -1,4 +1,20 @@
+// Package extractor contains higher order functions that return functions that can take a value and return some
+// derivative value for it.  It also defines a number of convenient extractors for use with http.Request objects.  The
+// idea is that the Extractor producing functions can take inputs that affect the derivative function's output.  For
+// instance the ExtractHeader(name string) function returns an instance of Extractor that expects a *http.Request to be
+// passed and returns the Header with the name passed to the higher order function.  In this way, the extractor can
+// be called repeatedly with different requests.  In most cases, Extractors are used with Predicates.
 package extractor
+// Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
+// licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+// compliance with the License.  You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations under the License.
 
 import (
 	"gopkg.in/xmlpath.v2"
@@ -18,39 +34,48 @@ func (ef ExtractorFunc) Extract(v interface{}) interface{} {
 	return ef(v)
 }
 
-// RequestKeyIdentity is a Extractor that returns the entire Request.
+// IdentityExtractor returns an Extractor that returns the value passed.
 func IdentityExtractor() Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		return r
 	})
 }
 
-// MethodExtractor is an extractor that returns the method of an http.Request.
+// ExtractMethod returns an extractor that expects a *http.Request and returns the method.
 func ExtractMethod() Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		return r.(*http.Request).Method
 	})
 }
 
-// ExtractPath is an Extractor that returns the request URL's Path property.  This is just path path portion of the URI.
+// ExtractPath returns an Extractor that expects a *http.Request and returns the URL's Path property.
 func ExtractPath() Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		return r.(*http.Request).URL.Path
 	})
 }
 
-// ExtractRequestURI is an Extractor that returns the request URL's RequestURI property.  This is the path and the query
-// portions of the URI.
+// ExtractRequestURI returns an Extractor that expects a *http.Request and returns the URL's RequestURI property.
 func ExtractRequestURI() Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		return r.(*http.Request).URL.RequestURI()
 	})
 }
 
-// ExtractHeader returns a Extractor that returns the value of the header named 'name'
+// ExtractHeader returns an Extractor that expects a *http.Request and returns the value of the header named 'name'.
 func ExtractHeader(name string) Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
+		if "HOST" == strings.ToUpper(name) {
+			return r.(*http.Request).Host
+		}
 		return r.(*http.Request).Header.Get(name)
+	})
+}
+
+// ExtractHost returns an Extractor that returns the value of the "Host" element in the request.
+func ExtractHost() Extractor {
+	return ExtractorFunc(func(r interface{}) interface{} {
+		return r.(*http.Request).Host
 	})
 }
 
@@ -66,8 +91,8 @@ func UpperCaseExtractor(extractor Extractor) Extractor {
 	})
 }
 
-// ExtractXPathString returns a Extractor that uses XPATH expression to extract a string from the Body of the
-// Request.
+// ExtractXPathString returns a Extractor that expects a *http.Request and uses the passed XPath expression to extract
+// a string from the Body of the request Request.
 func ExtractXPathString(xpath string) Extractor {
 	path := xmlpath.MustCompile(xpath)
 	return ExtractorFunc(func(r interface{}) interface{} {
@@ -80,9 +105,9 @@ func ExtractXPathString(xpath string) Extractor {
 	})
 }
 
-// ExtractPathElementByIndex returns a Extractor that extracts the path element at the given position.  A
-// negative number denotes a position from the end (starting at 1 e.g. -1 is the last element in the path).  For
-// positive inputs, the counting starts at 1 as well.
+// ExtractPathElementByIndex returns an Extractor that expects a *http.Request and extracts the path element at the
+// given position.  A negative number denotes a position from the end (starting at 1 e.g. -1 is the last element in the
+// path). For positive inputs, the counting starts at 1 as well.
 func ExtractPathElementByIndex(idx int) Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		elements := strings.Split(r.(*http.Request).URL.Path, "/")
@@ -99,7 +124,8 @@ func ExtractPathElementByIndex(idx int) Extractor {
 	})
 }
 
-// ExtractQueryParameter returns a Extractor that extracts a query parameters value.
+// ExtractQueryParameter returns an Extractor that expects a *http.Request and extracts they named query parameter's
+// value.
 func ExtractQueryParameter(name string) Extractor {
 	return ExtractorFunc(func(r interface{}) interface{} {
 		return r.(*http.Request).URL.Query().Get(name)
