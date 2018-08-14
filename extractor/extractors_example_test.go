@@ -11,7 +11,7 @@ package extractor_test
 // specific language governing permissions and limitations under the License.
 
 import (
-	"github.com/bluesoftdev/go-http-matchers/extractor"
+	"gitlab.com/ComputersFearMe/go-http-matchers/extractor"
 	"net/http"
 	"fmt"
 	"net/http/httputil"
