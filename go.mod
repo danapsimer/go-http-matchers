@@ -1,6 +1,4 @@
-module go-http-matchers
-
-replace gitlab.com/ComputersFearMe/go-http-matchers => ./
+module github.com/bluesoftdev/go-http-matchers
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

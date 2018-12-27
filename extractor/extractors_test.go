@@ -13,8 +13,8 @@ package extractor_test
 
 import (
 	"fmt"
+	"github.com/bluesoftdev/go-http-matchers/extractor"
 	"github.com/stretchr/testify/assert"
-	"go-http-matchers/extractor"
 	"net/http"
 	"net/http/httputil"
 	"reflect"

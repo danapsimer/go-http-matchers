@@ -13,7 +13,7 @@ package predicate_test
 
 import (
 	"fmt"
-	"go-http-matchers/predicate"
+	"github.com/bluesoftdev/go-http-matchers/predicate"
 	"net/http"
 	"regexp"
 )

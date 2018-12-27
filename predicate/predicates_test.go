@@ -12,8 +12,8 @@ package predicate_test
 // specific language governing permissions and limitations under the License.
 
 import (
+	. "github.com/bluesoftdev/go-http-matchers/predicate"
 	"github.com/stretchr/testify/assert"
-	. "go-http-matchers/predicate"
 	"net/http"
 	"regexp"
 	"testing"
