@@ -3,6 +3,7 @@
 // http.Request objects.  For instance, the QueryParameterEquals(name, value string) will return a Predicate that
 // expects a *http.Request and will return true if the value of query parameter named 'name' equals 'value'.
 package predicate
+
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in

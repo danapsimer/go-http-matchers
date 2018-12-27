@@ -1,4 +1,5 @@
 package extractor_test
+
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
@@ -12,8 +13,8 @@ package extractor_test
 
 import (
 	"fmt"
-	"go-http-matchers/extractor"
 	"github.com/stretchr/testify/assert"
+	"go-http-matchers/extractor"
 	"net/http"
 	"net/http/httputil"
 	"reflect"
@@ -195,5 +196,5 @@ func TestExtractHost(t *testing.T) {
 	req, err := http.NewRequest("GET", "http://foo.com/test/foo/bar?q=5&l=3", nil)
 	assert.NoError(t, err, "failed to create test request.")
 	result := extractor.ExtractHost().Extract(req)
-	assert.Equal(t,"foo.com", result)
+	assert.Equal(t, "foo.com", result)
 }

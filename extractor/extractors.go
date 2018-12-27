@@ -5,6 +5,7 @@
 // passed and returns the Header with the name passed to the higher order function.  In this way, the extractor can
 // be called repeatedly with different requests.  In most cases, Extractors are used with Predicates.
 package extractor
+
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in

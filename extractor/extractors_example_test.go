@@ -1,4 +1,5 @@
 package extractor_test
+
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
@@ -11,9 +12,9 @@ package extractor_test
 // specific language governing permissions and limitations under the License.
 
 import (
+	"fmt"
 	"go-http-matchers/extractor"
 	"net/http"
-	"fmt"
 	"net/http/httputil"
 	"strings"
 )
@@ -88,12 +89,11 @@ func ExampleExtractXPathString() {
 </foo>
 `
 	req, _ := http.NewRequest("POST", "http://foo.com/test", strings.NewReader(testXml))
-	fmt.Printf("xpath[/foo/bar/@snafu] = %s",extractor.ExtractXPathString("/foo/bar/@snafu").Extract(req))
+	fmt.Printf("xpath[/foo/bar/@snafu] = %s", extractor.ExtractXPathString("/foo/bar/@snafu").Extract(req))
 	// Output: xpath[/foo/bar/@snafu] = foobar
 }
 
 func ExampleUpperCaseExtractor() {
-	fmt.Printf("upperCase[FooBar] = %s",extractor.UpperCaseExtractor(extractor.IdentityExtractor()).Extract("FooBar"))
+	fmt.Printf("upperCase[FooBar] = %s", extractor.UpperCaseExtractor(extractor.IdentityExtractor()).Extract("FooBar"))
 	// Output: upperCase[FooBar] = FOOBAR
 }
-

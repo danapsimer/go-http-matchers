@@ -1,4 +1,5 @@
 package predicate_test
+
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
@@ -11,8 +12,8 @@ package predicate_test
 // specific language governing permissions and limitations under the License.
 
 import (
-	. "go-http-matchers/predicate"
 	"github.com/stretchr/testify/assert"
+	. "go-http-matchers/predicate"
 	"net/http"
 	"regexp"
 	"testing"
