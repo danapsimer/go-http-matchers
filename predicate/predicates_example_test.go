@@ -12,7 +12,7 @@ package predicate_test
 
 import (
 	"fmt"
-	"gitlab.com/ComputersFearMe/go-http-matchers/predicate"
+	"go-http-matchers/predicate"
 	"net/http"
 	"regexp"
 )

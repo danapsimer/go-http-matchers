@@ -15,7 +15,7 @@ package predicate
 // specific language governing permissions and limitations under the License.
 
 import (
-	. "gitlab.com/ComputersFearMe/go-http-matchers/extractor"
+	. "go-http-matchers/extractor"
 	"regexp"
 	"strings"
 )
