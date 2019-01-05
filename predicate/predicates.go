@@ -17,7 +17,6 @@ package predicate
 
 import (
 	. "github.com/bluesoftdev/go-http-matchers/extractor"
-	"regexp"
 	"strings"
 )
 
@@ -77,42 +76,6 @@ func False() Predicate {
 	return PredicateFunc(func(v interface{}) bool { return false })
 }
 
-// StringEquals returns a predicate that returns true if the value passed is a string and is equal to the value of
-// 'value'
-func StringEquals(value string) Predicate {
-	return PredicateFunc(func(s interface{}) bool {
-		return s.(string) == value
-	})
-}
-
-// StringContains returns a predicate that returns true if the value passed contains a substring matching 'value'.
-func StringContains(value string) Predicate {
-	return PredicateFunc(func(s interface{}) bool {
-		return strings.Contains(s.(string), value)
-	})
-}
-
-// StringStartsWith returns a predicate that returns true if the value passed starts with a substring matching 'value'.
-func StringStartsWith(value string) Predicate {
-	return PredicateFunc(func(s interface{}) bool {
-		return strings.HasPrefix(s.(string), value)
-	})
-}
-
-// StringEndsWith returns a predicate that returns true if the value passed ends with a substring matching 'value'.
-func StringEndsWith(value string) Predicate {
-	return PredicateFunc(func(s interface{}) bool {
-		return strings.HasSuffix(s.(string), value)
-	})
-}
-
-// StringMatches returns a predicate that returns true if the regex matches 'value'.
-func StringMatches(regex *regexp.Regexp) Predicate {
-	return PredicateFunc(func(s interface{}) bool {
-		return regex.MatchString(s.(string))
-	})
-}
-
 // ExtractedValueAccepted returns A predicate that extracts a value using the Extractor and passes that value to the
 // provided predicate
 func ExtractedValueAccepted(extractor Extractor, predicate Predicate) Predicate {
@@ -121,106 +84,8 @@ func ExtractedValueAccepted(extractor Extractor, predicate Predicate) Predicate 
 	})
 }
 
-// PathMatches returns a predicate that returns true if the path matches the pathRegex.
-func PathMatches(pathRegex *regexp.Regexp) Predicate {
-	return ExtractedValueAccepted(ExtractPath(), StringMatches(pathRegex))
-}
-
-// PathEquals returns a predicate that returns true if the path equals 'path'
-func PathEquals(path string) Predicate {
-	return ExtractedValueAccepted(ExtractPath(), StringEquals(path))
-}
-
-// PathStartsWith returns a predicate that returns true if the path starts with 'path'
-func PathStartsWith(path string) Predicate {
-	return ExtractedValueAccepted(ExtractPath(), StringStartsWith(path))
-}
-
-// HeaderMatches returns a predicate that returns true if the header named 'name' matches 'regex'
-func HeaderMatches(name string, regex *regexp.Regexp) Predicate {
-	return ExtractedValueAccepted(ExtractHeader(name), StringMatches(regex))
-}
-
-// HeaderEquals returns a predicate that returns true if the header named 'name' equals 'value'
-func HeaderEquals(name string, value string) Predicate {
-	return ExtractedValueAccepted(ExtractHeader(name), StringEquals(value))
-}
-
-// HeaderEqualsIgnoreCase returns a predicate that returns true if the header named 'name' equals 'value', ignoring
-// case.
-func HeaderEqualsIgnoreCase(name string, path string) Predicate {
-	return ExtractedValueAccepted(UpperCaseExtractor(ExtractHeader(name)), StringEquals(strings.ToUpper(path)))
-}
-
-// HeaderContains returns a predicate that returns true if the header named 'name' contains 'value'.
-func HeaderContains(name string, path string) Predicate {
-	return ExtractedValueAccepted(ExtractHeader(name), StringContains(path))
-}
-
-// HeaderContainsIgnoreCase returns a predicate that returns true if the header named 'name' contains 'value', ignoring
-// case.
-func HeaderContainsIgnoreCase(name string, path string) Predicate {
-	return ExtractedValueAccepted(UpperCaseExtractor(ExtractHeader(name)), StringContains(strings.ToUpper(path)))
-}
-
-// HeaderStartsWith returns a predicate that returns true if the header named 'name' starts with 'value'.
-func HeaderStartsWith(name string, path string) Predicate {
-	return ExtractedValueAccepted(ExtractHeader(name), StringStartsWith(path))
-}
-
-// RequestURIMatches returns a predicate that returns true if the request URI matches the pathRegex.
-func RequestURIMatches(pathRegex *regexp.Regexp) Predicate {
-	return ExtractedValueAccepted(ExtractRequestURI(), StringMatches(pathRegex))
-}
-
-// RequestURIEquals returns a predicate that returns true if the request URI equals the path.
-func RequestURIEquals(path string) Predicate {
-	return ExtractedValueAccepted(ExtractRequestURI(), StringEquals(path))
-}
-
-// RequestURIStartsWith returns a predicate that returns true if the request URI starts with the path.
-func RequestURIStartsWith(path string) Predicate {
-	return ExtractedValueAccepted(ExtractRequestURI(), StringStartsWith(path))
-}
-
 // MethodIs returns a predicate that takes a request, extracts the method, and returns true if it equals the method
 // provided, ignoring case.
 func MethodIs(method string) Predicate {
 	return ExtractedValueAccepted(UpperCaseExtractor(ExtractMethod()), StringEquals(strings.ToUpper(method)))
-}
-
-// QueryParamContainsIgnoreCase returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if it equals the value provided.
-func QueryParamEquals(name, value string) Predicate {
-	return ExtractedValueAccepted(ExtractQueryParameter(name), StringEquals(value))
-}
-
-// QueryParamContainsIgnoreCase returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if it equals the value provided, ignoring case.
-func QueryParamEqualsIgnoreCase(name, value string) Predicate {
-	return ExtractedValueAccepted(UpperCaseExtractor(ExtractQueryParameter(name)), StringEquals(strings.ToUpper(value)))
-}
-
-// QueryParamContainsIgnoreCase returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if it contains the value provided.
-func QueryParamContains(name, value string) Predicate {
-	return ExtractedValueAccepted(ExtractQueryParameter(name), StringContains(value))
-}
-
-// QueryParamContainsIgnoreCase returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if it contains the value provided, ignoring case.
-func QueryParamContainsIgnoreCase(name, value string) Predicate {
-	return ExtractedValueAccepted(UpperCaseExtractor(ExtractQueryParameter(name)), StringContains(strings.ToUpper(value)))
-}
-
-// QueryParamMatches returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if the value matches the pattern provided.
-func QueryParamMatches(name string, pattern *regexp.Regexp) Predicate {
-	return ExtractedValueAccepted(ExtractQueryParameter(name), StringMatches(pattern))
-}
-
-// QueryParamStartsWith returns a Predicate that takes a request, extracts the query parameter specified and
-// returns true if the value starts with the prefix provided.
-func QueryParamStartsWith(name string, prefix string) Predicate {
-	return ExtractedValueAccepted(ExtractQueryParameter(name), StringStartsWith(prefix))
 }

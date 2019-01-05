@@ -1,5 +1,4 @@
-package predicate_test
-
+package predicate
 // Licensed to BlueSoft Development, LLC under one or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information regarding copyright ownership.  BlueSoft Development, LLC
 // licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in
@@ -12,33 +11,21 @@ package predicate_test
 // specific language governing permissions and limitations under the License.
 
 import (
-	"fmt"
-	"github.com/bluesoftdev/go-http-matchers/predicate"
+	. "github.com/bluesoftdev/go-http-matchers/extractor"
+	"regexp"
 )
 
-func ExampleNot() {
-	fmt.Printf("%v\n", predicate.Not(predicate.True()).Accept(nil))
-	fmt.Printf("%v\n", predicate.Not(predicate.False()).Accept(nil))
-	// Output:
-	// false
-	// true
+// PathMatches returns a predicate that returns true if the path matches the pathRegex.
+func PathMatches(pathRegex *regexp.Regexp) Predicate {
+	return ExtractedValueAccepted(ExtractPath(), StringMatches(pathRegex))
 }
 
-func ExampleAnd() {
-	fmt.Printf("%v\n", predicate.And(predicate.True(), predicate.True()).Accept(nil))
-	fmt.Printf("%v\n", predicate.And(predicate.False(), predicate.True()).Accept(nil))
-	// Output:
-	// true
-	// false
+// PathEquals returns a predicate that returns true if the path equals 'path'
+func PathEquals(path string) Predicate {
+	return ExtractedValueAccepted(ExtractPath(), StringEquals(path))
 }
 
-func ExampleOr() {
-	fmt.Printf("%v\n", predicate.Or(predicate.False(), predicate.False()).Accept(nil))
-	fmt.Printf("%v\n", predicate.Or(predicate.False(), predicate.True()).Accept(nil))
-	// Output:
-	// false
-	// true
+// PathStartsWith returns a predicate that returns true if the path starts with 'path'
+func PathStartsWith(path string) Predicate {
+	return ExtractedValueAccepted(ExtractPath(), StringStartsWith(path))
 }
-
-
-
