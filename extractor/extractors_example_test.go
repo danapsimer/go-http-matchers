@@ -66,7 +66,7 @@ func ExampleExtractPathElementByIndex() {
 
 func ExampleIdentityExtractor() {
 	req, _ := http.NewRequest("GET", "http://foo.com/test/foo/bar?q=5&l=3", nil)
-	dump, _ := httputil.DumpRequest(req, false)
+	dump, _ := httputil.DumpRequest(extractor.IdentityExtractor().Extract(req).(*http.Request), false)
 	fmt.Printf("request = %q", dump)
 	// Output: request = "GET /test/foo/bar?q=5&l=3 HTTP/1.1\r\nHost: foo.com\r\n\r\n"
 }
