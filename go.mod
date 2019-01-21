@@ -1,4 +1,4 @@
-module github.com/bluesoftdev/go-http-matchers
+module go-http-matchers
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

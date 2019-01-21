@@ -13,7 +13,7 @@ package predicate_test
 
 import (
 	"fmt"
-	"github.com/bluesoftdev/go-http-matchers/predicate"
+	"go-http-matchers/predicate"
 )
 
 func ExampleNot() {
