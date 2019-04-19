@@ -1,7 +1,8 @@
 # Go Http Matchers
 > This project defines a set of functions that return predicates and extractors for making decisions about http request.
 
-[![Go Lang Version](https://img.shields.io/badge/go-1.11.0-blue.svg)](http://golang.com)
+[![Go Lang Version](https://img.shields.io/badge/go-1.11.0-blue.svg?style=plastic)](http://golang.com)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=plastic)](https://godoc.org/github.com/bluesoftdev/go-http-matchers)
 [![CircleCI](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master.svg?style=svg)](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master)
 
 The process of making decisions on how to handle an HTTP Request as in a mocking framework like
@@ -15,10 +16,6 @@ See [Mockery](http://github.com/bluesoftdev/mockery) for an example usage.
 ```sh
 go get github.com/bluesoftdev/go-http-matchers
 ```
-
-## Documentation
-
-[GoDoc](https://godoc.org/github.com/bluesoftdev/go-http-matchers)
 
 ## Development setup
 
