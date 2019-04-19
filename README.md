@@ -34,7 +34,9 @@ go mod download
 
 ## Meta
 
-Dana P'Simer – [@ComputersFearMe](https://twitter.com/computersfearme) – danap@bluesoftdev.com
+* Dana P'Simer 
+* [@ComputersFearMe](https://twitter.com/computersfearme) 
+* danap@bluesoftdev.com
 
 Distributed under the Apache 2.0 license. See ``LICENSE`` for more information.
 
