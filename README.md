@@ -2,6 +2,7 @@
 > This project defines a set of functions that return predicates and extractors for making decisions about http request.
 
 [![Go Lang Version](https://img.shields.io/badge/go-1.11.0-blue.svg)](http://golang.com)
+[![CircleCI](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master.svg?style=svg)](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master)
 
 The process of making decisions on how to handle an HTTP Request as in a mocking framework like
 [Mockery](http://github.com/bluesoftdev/mockery) or a reverse proxy like [Iluvitar](http://github.com/bluesoftdev/iluvitar)
