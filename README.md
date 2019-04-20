@@ -3,6 +3,7 @@
 
 [![Go Lang Version](https://img.shields.io/badge/go-1.11.0-blue.svg?style=plastic)](http://golang.com)
 [![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=plastic)](https://godoc.org/github.com/bluesoftdev/go-http-matchers)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bluesoftdev/go-http-matchers)](https://goreportcard.com/report/github.com/bluesoftdev/go-http-matchers)
 [![CircleCI](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master.svg?style=svg)](https://circleci.com/gh/bluesoftdev/go-http-matchers/tree/master)
 
 The process of making decisions on how to handle an HTTP Request as in a mocking framework like
