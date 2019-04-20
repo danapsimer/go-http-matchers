@@ -31,6 +31,15 @@ func TestExtractHeader(t *testing.T) {
 	assert.Equal(t, "Bar", result, "expected result to be Bar but got: "+result.(string))
 }
 
+func TestExtractHeaderHOST(t *testing.T) {
+	req, err := http.NewRequest("GET", "http://foo.com/test?q=5&l=3", nil)
+	assert.NoError(t, err, "failed to create test request.")
+	req.Host = "google.com"
+
+	result := extractor.ExtractHeader("host").Extract(req)
+	assert.Equal(t, "google.com", result, "expected result to be google.com but got: "+result.(string))
+}
+
 func TestExtractHeader_NotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "http://foo.com/test?q=5&l=3", nil)
 	assert.NoError(t, err, "failed to create test request.")
