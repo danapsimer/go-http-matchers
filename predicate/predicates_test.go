@@ -69,4 +69,3 @@ func TestMethodIs(t *testing.T) {
 	assert.True(t, MethodIs("GET").Accept(req))
 	assert.False(t, MethodIs("POST").Accept(req))
 }
-

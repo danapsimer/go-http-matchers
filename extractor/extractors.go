@@ -31,6 +31,7 @@ type Extractor interface {
 // ExtractorFunc is a function that calls itself when it's Extract method is called.
 type ExtractorFunc func(interface{}) interface{}
 
+// Extract extracts the value by calling the ExtractorFunc
 func (ef ExtractorFunc) Extract(v interface{}) interface{} {
 	return ef(v)
 }

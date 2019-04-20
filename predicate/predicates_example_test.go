@@ -39,6 +39,3 @@ func ExampleOr() {
 	// false
 	// true
 }
-
-
-

@@ -16,7 +16,7 @@ package predicate
 // specific language governing permissions and limitations under the License.
 
 import (
-	. "github.com/bluesoftdev/go-http-matchers/extractor"
+	"github.com/bluesoftdev/go-http-matchers/extractor"
 	"strings"
 )
 
@@ -28,7 +28,7 @@ type Predicate interface {
 // PredicateFunc is an implementation of Predicate that is a function and calls itself on a call to Accept
 type PredicateFunc func(interface{}) bool
 
-// PredicateFunc.Accept calls the predicate func with the passed value.
+// Accept calls the predicate func with the passed value.
 func (pf PredicateFunc) Accept(v interface{}) bool {
 	return pf(v)
 }
@@ -66,19 +66,19 @@ func Not(predicate Predicate) Predicate {
 	})
 }
 
-// TruePredicate is a predicate that returns true for all inputs.
+// True returns a predicate that returns true for all inputs.
 func True() Predicate {
 	return PredicateFunc(func(v interface{}) bool { return true })
 }
 
-// FalsePredicate is a predicate that returns false for all inputs.
+// False returns a predicate that returns false for all inputs.
 func False() Predicate {
 	return PredicateFunc(func(v interface{}) bool { return false })
 }
 
 // ExtractedValueAccepted returns A predicate that extracts a value using the Extractor and passes that value to the
 // provided predicate
-func ExtractedValueAccepted(extractor Extractor, predicate Predicate) Predicate {
+func ExtractedValueAccepted(extractor extractor.Extractor, predicate Predicate) Predicate {
 	return PredicateFunc(func(v interface{}) bool {
 		return predicate.Accept(extractor.Extract(v))
 	})
@@ -87,5 +87,5 @@ func ExtractedValueAccepted(extractor Extractor, predicate Predicate) Predicate 
 // MethodIs returns a predicate that takes a request, extracts the method, and returns true if it equals the method
 // provided, ignoring case.
 func MethodIs(method string) Predicate {
-	return ExtractedValueAccepted(UpperCaseExtractor(ExtractMethod()), StringEquals(strings.ToUpper(method)))
+	return ExtractedValueAccepted(extractor.UpperCaseExtractor(extractor.ExtractMethod()), StringEquals(strings.ToUpper(method)))
 }

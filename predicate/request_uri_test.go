@@ -31,4 +31,3 @@ func TestRequestURIEquals(t *testing.T) {
 	assert.True(t, RequestURIEquals("/test/foo/bar?q=5&l=3").Accept(req))
 	assert.False(t, RequestURIEquals("/test/bar/foo?q=5&l=3").Accept(req))
 }
-
