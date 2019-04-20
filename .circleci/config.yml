@@ -3,10 +3,13 @@ jobs:
   build:
     docker:
       - image: golang:1.11
+    environment:
+      CODECOV_TOKEN: afe61631-c421-4009-92bb-079d37ac0916
     steps:
       - checkout
       - run:
           command: |
             go mod download
             go build ./...
-            go test ./...
+            go test -race -coverprofile=coverage.txt -covermode=count ./...
+            bash <(curl -s https://codecov.io/bash)
