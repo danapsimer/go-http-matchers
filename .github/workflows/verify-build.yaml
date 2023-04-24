@@ -15,4 +15,13 @@ jobs:
       - name: Run Tests
         run: |
           cd ${{ github.workspace }}
-          go test -v ./...
+          export GOPATH="$HOME/go/"
+          export PATH=$PATH:$GOPATH/bin
+          go install github.com/jstemmer/go-junit-report@latest
+          go test -v ./... | go-junit-report -set-exit-code > report.xml
+      - name: Test Summary
+        uses: test-summary/action@v1
+        with:
+          paths: |
+            ${{ github.workspace }}/report.xml
+        if: always()
