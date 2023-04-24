@@ -63,3 +63,9 @@ func TestHeaderStartsWith(t *testing.T) {
 	assert.True(t, HeaderStartsWith("FOO", "FOO").Accept(req), "expected true.")
 	assert.False(t, HeaderStartsWith("FOO", "snafu").Accept(req), "expected false.")
 }
+
+func TestRequestKeyStringMatches(t *testing.T) {
+	key := "foo"
+	assert.False(t, StringMatches(regexp.MustCompile("\\d+")).Accept(key))
+	assert.True(t, StringMatches(regexp.MustCompile("[a-z]+")).Accept(key))
+}
