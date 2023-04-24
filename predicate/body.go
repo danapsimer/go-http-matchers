@@ -1,7 +1,7 @@
 package predicate
 
 import (
-	"github.com/bluesoftdev/go-http-matchers/extractor"
+	"github.com/danapsimer/go-http-matchers/extractor"
 	"regexp"
 	"strings"
 )
