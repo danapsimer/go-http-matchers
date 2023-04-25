@@ -2,7 +2,7 @@ package predicate_test
 
 import (
 	"fmt"
-	"github.com/bluesoftdev/go-http-matchers/predicate"
+	"github.com/danapsimer/go-http-matchers/predicate"
 	"net/http"
 	"regexp"
 )
@@ -11,8 +11,8 @@ func ExampleHeaderContains() {
 	req, _ := http.NewRequest("GET", "http://foo.com/test/foo/bar?q=5&l=3", nil)
 	req.Header.Add("FOO", "FOOBAR")
 
-	fmt.Printf("%v\n", predicate.HeaderContainsIgnoreCase("FOO", "BAR").Accept(req))
-	fmt.Printf("%v\n", predicate.HeaderContainsIgnoreCase("FOO", "snafu").Accept(req))
+	fmt.Printf("%v\n", predicate.HeaderContains("FOO", "BAR").Accept(req))
+	fmt.Printf("%v\n", predicate.HeaderContains("FOO", "snafu").Accept(req))
 	// Output:
 	// true
 	// false
