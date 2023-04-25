@@ -5,7 +5,7 @@ jobs:
   VerifyBuild:
     name: Run Tests
     runs-on: ubuntu-latest
-    env:
+#    env:
 #      GOPATH: "$HOME/go"
 #      PATH: "$PATH:%GOPATH/bin"
     steps:
