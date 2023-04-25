@@ -2,7 +2,7 @@ package predicate_test
 
 import (
 	"fmt"
-	. "github.com/bluesoftdev/go-http-matchers/predicate"
+	. "github.com/danapsimer/go-http-matchers/predicate"
 	"regexp"
 )
 

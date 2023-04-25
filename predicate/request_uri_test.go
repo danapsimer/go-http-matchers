@@ -1,7 +1,7 @@
 package predicate_test
 
 import (
-	. "github.com/bluesoftdev/go-http-matchers/predicate"
+	. "github.com/danapsimer/go-http-matchers/predicate"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"regexp"

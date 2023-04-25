@@ -13,7 +13,7 @@ package extractor_test
 
 import (
 	"fmt"
-	"github.com/bluesoftdev/go-http-matchers/extractor"
+	"github.com/danapsimer/go-http-matchers/extractor"
 	"net/http"
 	"net/http/httputil"
 	"strings"

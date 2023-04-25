@@ -12,7 +12,7 @@ package predicate
 // specific language governing permissions and limitations under the License.
 
 import (
-	"github.com/bluesoftdev/go-http-matchers/extractor"
+	"github.com/danapsimer/go-http-matchers/extractor"
 	"regexp"
 	"strings"
 )
