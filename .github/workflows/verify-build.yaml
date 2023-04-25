@@ -5,6 +5,9 @@ jobs:
   VerifyBuild:
     name: Run Tests
     runs-on: ubuntu-latest
+    env:
+      GOPATH: "$HOME/go"
+      PATH: "$PATH:%GOPATH/bin"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -16,22 +19,18 @@ jobs:
         run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}:@github.com/".insteadOf "https://github.com"
       - name: Install Dependencies
         run: |
-          export GOPATH="$HOME/go/"
-          export PATH=$PATH:$GOPATH/bin
-          go get github.com/jstemmer/go-junit-report/v2@latest 
-          go install github.com/jstemmer/go-junit-report/v2@latest
-      - name: Run vet & lint
+          go mod download
+      - name: Code Check
         run: |
-          go vet .
-          golint .
+          go vet -json ./... >vet_results.json
+      - name: Build
+        run: |
+          go build ./...
       - name: Run Tests
         run: |
-          cd ${{ github.workspace }}
-          
-          go test -json ./... 2>&1 | go-junit-report -parser gojson -out report.xml
-      - name: Test Summary
-        uses: test-summary/action@v1
+          go test -json ./... 2>&1 >test_results.json
+      - name: Upload
+        uses: actions/upload-artifact@v3
         with:
-          paths: |
-            ${{ github.workspace }}/report.xml
+          path: "*_results.json"
         if: always()
